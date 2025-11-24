@@ -6,6 +6,7 @@ import './App.css'
 
 function App() {
   const [displayText, setDisplayText] = useState('')
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
   const fullText = 'we are going to $monillions'
 
   useEffect(() => {
@@ -20,6 +21,15 @@ function App() {
     }, 100)
 
     return () => clearInterval(timer)
+  }, [])
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY })
+    }
+
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
 
   const handleTweet = () => {
@@ -41,6 +51,13 @@ function App() {
     <>
       <div className="background-aura"></div>
       <div className="conic-background"></div>
+      <div 
+        className="tech-grid" 
+        style={{ 
+          '--mouse-x': `${mousePos.x}px`,
+          '--mouse-y': `${mousePos.y}px`
+        } as React.CSSProperties}
+      ></div>
       <div className="floating-particles">
         {particles.map((particle) => (
           <div key={particle.id} className="particle" style={{
@@ -51,22 +68,21 @@ function App() {
           } as React.CSSProperties}></div>
         ))}
       </div>
+      <div className="logo-header">
+        <img src={monillionsLogo} className="main-logo" alt="Monillions Logo" />
+      </div>
       <div className="content">
-        <div className="logo-section">
-          <img src={monillionsLogo} className="main-logo" alt="Monillions Logo" />
-        </div>
-
         <div className="typewriter-container">
           <h1 className="typewriter-text">{displayText}<span className="cursor">|</span></h1>
         </div>
 
         <div className="logos-section">
-          <div className="logo-item">
+          <a href="https://twitter.com/monillions" target="_blank" rel="noopener noreferrer" className="logo-item">
             <img src={twitterLogo} className="platform-logo" alt="Twitter" />
-          </div>
-          <div className="logo-item">
+          </a>
+          <a href="https://nad.fun" target="_blank" rel="noopener noreferrer" className="logo-item">
             <img src={nadFunLogo} className="platform-logo" alt="Nad.fun" />
-          </div>
+          </a>
         </div>
 
         <div className="action-section">
