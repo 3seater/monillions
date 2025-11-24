@@ -1,5 +1,4 @@
 import { useState, useEffect, useMemo } from 'react'
-import monillionsLogo from './assets/site assets/monillions logo.png'
 import nadFunLogo from './assets/site assets/nad.fun.png'
 import twitterLogo from './assets/site assets/twitter.png'
 import letterO from './assets/letters/O.svg'
