@@ -2,12 +2,13 @@ import { useState, useEffect, useMemo } from 'react'
 import monillionsLogo from './assets/site assets/monillions logo.png'
 import nadFunLogo from './assets/site assets/nad.fun.png'
 import twitterLogo from './assets/site assets/twitter.png'
+import letterO from './assets/letters/O.svg'
 import './App.css'
 
 function App() {
   const [displayText, setDisplayText] = useState('')
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
-  const fullText = 'we are going to $monillions'
+  const fullText = 'we are going to $MONILLIONS'
 
   useEffect(() => {
     let index = 0
@@ -68,12 +69,32 @@ function App() {
           } as React.CSSProperties}></div>
         ))}
       </div>
-      <div className="logo-header">
-        <img src={monillionsLogo} className="main-logo" alt="Monillions Logo" />
-      </div>
       <div className="content">
         <div className="typewriter-container">
-          <h1 className="typewriter-text">{displayText}<span className="cursor">|</span></h1>
+          <h1 className="typewriter-text">
+            {displayText.split('').map((char, index) => {
+              // Check if we're in the "MONILLIONS" part (after "we are going to $")
+              const monillionsStart = 'we are going to $'.length
+              const isInMonillions = index >= monillionsStart
+              const isO = char.toLowerCase() === 'o'
+              
+              // Use custom 'o' image for the two o's in "MONILLIONS"
+              if (isInMonillions && isO) {
+                return (
+                  <img 
+                    key={index}
+                    src={letterO} 
+                    alt="O"
+                    className="typewriter-letter-o"
+                  />
+                )
+              }
+              
+              // Use text for everything else (spaces will render as spaces)
+              return <span key={index} className="typewriter-char">{char}</span>
+            })}
+            <span className="cursor">|</span>
+          </h1>
         </div>
 
         <div className="logos-section">
