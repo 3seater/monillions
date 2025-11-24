@@ -116,10 +116,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 1rem;
   z-index: 10;
   position: relative;
-  padding: 2rem;
+  padding: 1.5rem;
   min-height: 100vh;
 }
 
@@ -135,28 +135,32 @@
 .typewriter-container {
   text-align: center;
   position: relative;
+  width: 100%;
 }
 
 .typewriter-text {
-  font-size: 2.5rem;
+  font-size: clamp(2rem, 5vw, 3.25rem);
   font-weight: 700;
   color: rgba(255, 255, 255, 0.95);
   font-family: 'Montserrat', sans-serif;
   letter-spacing: -0.02em;
   margin: 0;
-  min-height: 3.5rem;
+  min-height: clamp(3rem, 6vw, 4.5rem);
+  line-height: 1.1;
   display: inline-flex;
   align-items: baseline;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
   text-shadow: 0 0 20px rgba(129, 107, 250, 0.5);
-  white-space: pre;
+  white-space: nowrap;
+  width: 100%;
 }
 
 .typewriter-char {
   display: inline-block;
   line-height: 1.2;
   vertical-align: baseline;
+  white-space: pre;
 }
 
 .typewriter-letter-o {
@@ -179,6 +183,42 @@
   text-shadow: 0 0 10px #816bfa;
 }
 
+.text-hover-effect {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.typewriter-monillions {
+  display: inline-flex;
+}
+
+.text-hover-effect .typewriter-char--monillions,
+.text-hover-effect .typewriter-char--monillions .typewriter-letter-o {
+  transition: color 0.3s ease, -webkit-text-stroke 0.3s ease, text-shadow 0.3s ease;
+}
+
+.text-hover-effect:hover .typewriter-char--monillions {
+  color: transparent;
+  -webkit-text-stroke: 1.4px #765de3;
+  text-shadow: 0 0 18px rgba(118, 93, 227, 0.7);
+}
+
+.text-hover-effect:hover .typewriter-letter-o {
+  filter: brightness(0) saturate(100%) invert(42%) sepia(88%) saturate(1500%) hue-rotate(240deg) brightness(95%) contrast(90%)
+          drop-shadow(0 0 8px rgba(118, 93, 227, 0.9))
+          drop-shadow(0 0 16px rgba(118, 93, 227, 0.6));
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+.typewriter-monillions {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: nowrap;
+}
+
 @keyframes blink {
   0%, 50% {
     opacity: 1;
@@ -190,17 +230,20 @@
 
 .logos-section {
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
   align-items: center;
-  margin: 0.5rem 0;
+  margin: 0.25rem 0;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
 }
 
 .logo-item {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 60px;
-  height: 60px;
+  width: clamp(56px, 10vw, 78px);
+  height: clamp(56px, 10vw, 78px);
   background: rgba(255, 255, 255, 0.05);
   border-radius: 16px;
   border: 1px solid rgba(129, 107, 250, 0.2);
@@ -208,6 +251,10 @@
   transition: all 0.3s ease;
   text-decoration: none;
   cursor: pointer;
+}
+
+.logos-section .border-beam-container {
+  border-radius: 16px;
 }
 
 .logo-item:hover {
@@ -218,8 +265,8 @@
 }
 
 .platform-logo {
-  width: 32px;
-  height: 32px;
+  width: clamp(28px, 5vw, 42px);
+  height: clamp(28px, 5vw, 42px);
   filter: brightness(0) invert(1);
   opacity: 0.8;
   transition: opacity 0.3s ease;
@@ -237,19 +284,23 @@
 
 .tweet-button {
   position: relative;
-  padding: 1rem 2rem;
+  padding: clamp(1rem, 3vw, 1.3rem) clamp(2rem, 7vw, 2.6rem);
   background: linear-gradient(135deg, #816bfa 0%, #2f2570 100%);
   border: none;
   border-radius: 50px;
   color: white;
   font-family: 'Helvetica Neue', Helvetica, Arial, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 0.95rem;
+  font-size: clamp(1rem, 3vw, 1.24rem);
   font-weight: 500;
   letter-spacing: -0.01em;
   cursor: pointer;
   transition: all 0.3s ease;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(129, 107, 250, 0.3);
+}
+
+.action-section .border-beam-container {
+  border-radius: 50px;
 }
 
 .tweet-button:hover {
@@ -283,10 +334,6 @@
   background: linear-gradient(135deg, #9b7fff 0%, #3a2a80 100%);
 }
 
-.tweet-button:hover::before,
-.tweet-button:hover::after {
-  animation: rotate-border 1.5s linear infinite;
-}
 
 .tweet-text {
   position: relative;
@@ -350,82 +397,61 @@
 
 /* Responsive design */
 @media (max-width: 768px) {
-  .logo-header {
-    top: 1.5rem;
-    right: 1.5rem;
-  }
-
-  .main-logo {
-    width: 140px;
+  .content {
+    width: min(94vw, 640px);
+    padding: 1rem;
+    gap: 0.85rem;
   }
 
   .typewriter-text {
-    font-size: 2rem;
-  }
-
-  .typewriter-letter-o {
-    height: 2rem;
+    font-size: clamp(1.8rem, 7vw, 2.4rem);
+    min-height: clamp(2.6rem, 7vw, 3.4rem);
   }
 
   .logos-section {
-    gap: 1.5rem;
+    gap: 0.85rem;
   }
 
   .logo-item {
-    width: 50px;
-    height: 50px;
+    width: clamp(48px, 14vw, 64px);
+    height: clamp(48px, 14vw, 64px);
   }
 
   .platform-logo {
-    width: 26px;
-    height: 26px;
-  }
-
-  .content {
-    gap: 1.25rem;
-    padding: 1rem;
+    width: clamp(24px, 6vw, 32px);
+    height: clamp(24px, 6vw, 32px);
   }
 }
 
 @media (max-width: 480px) {
-  .logo-header {
-    top: 1rem;
-    right: 1rem;
-  }
-
-  .main-logo {
-    width: 120px;
+  .content {
+    width: 94vw;
+    padding: 0.9rem;
+    gap: 0.75rem;
   }
 
   .typewriter-text {
-    font-size: 1.6rem;
+    font-size: clamp(1.5rem, 8vw, 2rem);
     letter-spacing: -0.01em;
-  }
-
-  .typewriter-letter-o {
-    height: 1.6rem;
+    line-height: 1.05;
   }
 
   .logos-section {
-    gap: 1.25rem;
+    gap: 0.65rem;
   }
 
   .logo-item {
-    width: 45px;
-    height: 45px;
+    width: clamp(42px, 20vw, 54px);
+    height: clamp(42px, 20vw, 54px);
   }
 
   .platform-logo {
-    width: 22px;
-    height: 22px;
-  }
-
-  .content {
-    gap: 1rem;
+    width: clamp(20px, 7vw, 28px);
+    height: clamp(20px, 7vw, 28px);
   }
 
   .tweet-button {
-    padding: 0.9rem 1.75rem;
-    font-size: 0.85rem;
+    padding: 0.85rem 1.5rem;
+    font-size: 0.95rem;
   }
 }

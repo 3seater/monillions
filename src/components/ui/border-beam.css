@@ -1,0 +1,87 @@
+.border-beam-container {
+  position: relative;
+  display: inline-block;
+  border-radius: inherit;
+}
+
+.border-beam-wrapper {
+  position: relative;
+  display: inline-block;
+  border-radius: inherit;
+  overflow: visible;
+}
+
+.border-beam-wrapper > * {
+  border-radius: inherit;
+  position: relative;
+  z-index: 1;
+}
+
+.border-beam {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.border-beam::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    transparent 0deg,
+    transparent 340deg,
+    var(--color-from, #765de3) 350deg,
+    var(--color-to, #816bfa) 355deg,
+    var(--color-from, #765de3) 360deg,
+    transparent 20deg
+  );
+  transform: translate(-50%, -50%);
+  animation: border-beam-spin var(--duration, 3s) linear infinite;
+  animation-delay: var(--delay, 0s);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 2px;
+  border-radius: inherit;
+}
+
+.border-beam::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    transparent 0deg,
+    transparent 340deg,
+    var(--color-from, #765de3) 350deg,
+    var(--color-to, #816bfa) 355deg,
+    var(--color-from, #765de3) 360deg,
+    transparent 20deg
+  );
+  transform: translate(-50%, -50%);
+  filter: blur(16px);
+  opacity: 0.8;
+  animation: border-beam-spin var(--duration, 3s) linear infinite;
+  animation-delay: var(--delay, 0s);
+  border-radius: inherit;
+}
+
+@keyframes border-beam-spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
