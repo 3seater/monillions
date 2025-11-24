@@ -123,7 +123,7 @@ function App() {
             </a>
           </BorderBeam>
           <BorderBeam duration={4} delay={1} colorFrom="#765de3" colorTo="#816bfa">
-            <a href="https://nad.fun" target="_blank" rel="noopener noreferrer" className="logo-item">
+            <a href="https://nad.fun/tokens/0xEbE248811D107B87fBA3eFF95f786cdF15db7777" target="_blank" rel="noopener noreferrer" className="logo-item">
               <img src={nadFunLogo} className="platform-logo" alt="Nad.fun" />
             </a>
           </BorderBeam>
