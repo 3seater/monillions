@@ -2,7 +2,6 @@ import { useState, useEffect, useMemo } from 'react'
 import nadFunLogo from './assets/site assets/nad.fun.png'
 import twitterLogo from './assets/site assets/twitter.png'
 import letterO from './assets/letters/O.svg'
-import { TextHoverEffect } from './components/ui/text-hover-effect'
 import { BorderBeam } from './components/ui/border-beam'
 import './App.css'
 
